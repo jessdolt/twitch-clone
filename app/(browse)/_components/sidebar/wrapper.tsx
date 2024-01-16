@@ -2,19 +2,36 @@
 
 import { cn } from "@/lib/utils"
 import { useSidebar } from "@/store/use-sidebar"
+import { ToggleSkeleton } from "./toggle"
+import { RecommendedSkeleton } from "./recommended"
+import { useIsClient } from "usehooks-ts"
 
 interface WrapperProps {
   children: React.ReactNode
 }
 
 export const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+  const isClient = useIsClient()
   const { collapsed } = useSidebar((state) => state)
+
+  if (!isClient)
+    return (
+      <aside
+        className={cn(
+          "fixed left-0 flex flex-col w-60 h-full bg-background border-r border-[#2d2e35] z-50",
+          collapsed && "w-[70px]"
+        )}
+      >
+        <ToggleSkeleton />
+        <RecommendedSkeleton />
+      </aside>
+    )
 
   return (
     <aside
       className={cn(
         "fixed left-0 flex flex-col w-60 h-full bg-background border-r border-[#2d2e35] z-50",
-        collapsed && "w-[70px]"
+        collapsed && "w-[70px] l"
       )}
     >
       {children}
