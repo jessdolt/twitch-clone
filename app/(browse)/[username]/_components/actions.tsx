@@ -1,5 +1,6 @@
 "use client"
 
+import { onBlock, onUnblock } from "@/actions/block"
 import { onFollow, onUnfollow } from "@/actions/follow"
 import { Button } from "@/components/ui/button"
 import { useTransition } from "react"
@@ -41,9 +42,39 @@ export const Actions: React.FC<ActionsProps> = ({ userId, isFollowing }) => {
     isFollowing ? handleUnfollow() : handleFollow()
   }
 
+  const handleBlock = () => {
+    startTransition(async () => {
+      try {
+        await onBlock(userId)
+        toast.success("User Blocked!")
+      } catch (e) {
+        console.log(e)
+        toast.error("Error!")
+      }
+    })
+  }
+
+  const handleUnblock = () => {
+    startTransition(async () => {
+      try {
+        await onUnblock(userId)
+        toast.success("User Unblocked!")
+      } catch (e) {
+        console.log(e)
+        toast.error("Error!")
+      }
+    })
+  }
+
   return (
-    <Button disabled={isPending} onClick={onClick}>
-      {isFollowing ? "Unfollow" : "Follow"}
-    </Button>
+    <>
+      <Button disabled={isPending} onClick={onClick} variant="primary">
+        {isFollowing ? "Unfollow" : "Follow"}
+      </Button>
+
+      <Button disabled={isPending} onClick={handleBlock}>
+        Block
+      </Button>
+    </>
   )
 }
