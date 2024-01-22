@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 
 import { Navbar } from "./_components/navbar"
 import { Sidebar } from "./_components/sidebar"
+import { Container } from "./_components/container"
 
 interface CreatorLayoutProps {
   params: { username: string }
@@ -24,7 +25,7 @@ const CreatorPageLayout: React.FC<CreatorLayoutProps> = async ({
       <Navbar />
       <div className="flex h-full pt-20">
         <Sidebar />
-        {children}
+        <Container>{children}</Container>
       </div>
     </>
   )

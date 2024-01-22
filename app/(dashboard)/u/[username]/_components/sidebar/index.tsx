@@ -1,5 +1,12 @@
-import React from "react"
+import { Wrapper } from "./wrapper"
+import { Toggle } from "./toggle"
+import { Navigation } from "./navigation"
 
 export const Sidebar = () => {
-  return <div>Sidebar</div>
+  return (
+    <Wrapper>
+      <Toggle />
+      <Navigation />
+    </Wrapper>
+  )
 }
