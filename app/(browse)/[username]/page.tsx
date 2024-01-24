@@ -1,5 +1,5 @@
 import { isFollowingUser } from "@/lib/follow-service"
-import { getuserByUsername } from "@/lib/user-service"
+import { getUserByUsername } from "@/lib/user-service"
 import { notFound } from "next/navigation"
 import React from "react"
 import { Actions } from "./_components/actions"
@@ -12,7 +12,7 @@ interface UserPageProps {
 }
 
 const UserPage: React.FC<UserPageProps> = async ({ params: { username } }) => {
-  const user = await getuserByUsername(username)
+  const user = await getUserByUsername(username)
 
   if (!user) notFound()
 

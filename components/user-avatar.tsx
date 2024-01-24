@@ -47,7 +47,7 @@ export const UserAvatar: React.FC<UserAvatarProps> = ({
         </AvatarFallback>
       </Avatar>
       {canShowBadge && (
-        <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 ">
+        <div className="lg:hidden absolute -bottom-3 left-1/2 transform -translate-x-1/2 ">
           <LiveBadge />
         </div>
       )}
